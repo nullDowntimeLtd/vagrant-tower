@@ -1,6 +1,7 @@
 ---
 - name: Configure demo boxes
   hosts: all
+  sudo_user: root
   sudo: true
   vars_files:
   - netvars/net.yml
@@ -10,6 +11,7 @@
 
 - name: Deploy Tower
   hosts: tower
+  sudo_user: root
   sudo: true
   vars_files:
   - netvars/net.yml

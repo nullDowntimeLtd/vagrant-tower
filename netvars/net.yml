@@ -1,7 +1,8 @@
 vsubnet: 192.168.250
-vns: "{{ vsubnet }}.254"
-vgateway: "{{ vsubnet }}.254"
-vnetmask: 255.255.255.0 
+domain: systems.private
+vns: 8.8.8.8
+vgateway: "{{ vsubnet }}.1"
+vnetmask: 255.255.255.0
 vagrant0: "{{ vsubnet }}.10"
 vagrant1: "{{ vsubnet }}.11"
 vagrant2: "{{ vsubnet }}.12"

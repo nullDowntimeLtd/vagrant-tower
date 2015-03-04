@@ -1,23 +1,23 @@
 ---
 # This role contains common plays that will run on all nodes.
 
-- name: Install EPEL 7
-  yum: name=http://fedora.mirrors.pair.com/epel/7/x86_64/e/epel-release-7-5.noarch.rpm state=present
+- name: Install EPEL 6
+  yum: name=https://anorien.csc.warwick.ac.uk/mirrors/epel/6/x86_64/epel-release-6-8.noarch.rpm state=present
 
 - name: yum update all the things
   yum: name=* state=latest
 
-- name: remove some useless packages
-  yum: name={{ item }} state=absent
-  with_items:
-  - puppet
-  - chef
+#- name: remove some useless packages
+#  yum: name={{ item }} state=absent
+#  with_items:
+#  - puppet
+#  - chef
 
 - name: add routes
   template: src=ifcfg-eth1.j2 dest=/etc/sysconfig/network-scripts/ifcfg-eth1
 
 - name: turn off eth0
-  template: src=ifcfg-eth0.j2 dest=/etc/sysconfig/network-scripts/ifcfg-eth0
+  template: src=ifcfg-eth-disable.j2 dest=/etc/sysconfig/network-scripts/ifcfg-eth0
 
 - name: fix resolv.conf
   template: src=resolv.conf.j2 dest=/etc/resolv.conf
