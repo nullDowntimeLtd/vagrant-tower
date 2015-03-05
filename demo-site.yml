@@ -10,7 +10,7 @@
   - common
 
 - name: Deploy Tower
-  hosts: tower
+  hosts: towerf
   sudo_user: root
   sudo: true
   vars_files:
