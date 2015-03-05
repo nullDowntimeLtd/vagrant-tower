@@ -13,14 +13,14 @@
 #  - puppet
 #  - chef
 
-- name: add routes
-  template: src=ifcfg-eth1.j2 dest=/etc/sysconfig/network-scripts/ifcfg-eth1
+#- name: add routes
+#  template: src=ifcfg-eth1.j2 dest=/etc/sysconfig/network-scripts/ifcfg-eth1
 
-- name: turn off eth0
-  template: src=ifcfg-eth-disable.j2 dest=/etc/sysconfig/network-scripts/ifcfg-eth0
+#- name: turn off eth0
+#  template: src=ifcfg-eth-disable.j2 dest=/etc/sysconfig/network-scripts/ifcfg-eth0
 
-- name: fix resolv.conf
-  template: src=resolv.conf.j2 dest=/etc/resolv.conf
+#- name: fix resolv.conf
+#  template: src=resolv.conf.j2 dest=/etc/resolv.conf
 
 - name: set up authorized keys for demo boxes
   authorized_key: user=vagrant key="{{ lookup('file', 'id_rsa.pub') }}"
@@ -37,5 +37,6 @@
   when: inventory_hostname != "tower"
 
 - name: waiting for server to come back
-  pause: seconds=30
+  local_action: wait_for host={{ inventory_hostname }} state=started
+  sudo: false
   when: inventory_hostname != "tower"
